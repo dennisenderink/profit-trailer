@@ -1,0 +1,29 @@
+---
+- name: Add/update configuration files
+  template:
+    src: "templates/{{ bot_config.name }}/{{ item }}.properties.j2"
+    dest: "/home/{{ pt_bot_user }}/{{ bot_config.name }}/{{ item }}.properties"
+    owner: "{{ pt_bot_user }}"
+    group: "{{ pt_bot_user }}"
+  with_items:
+    - application
+    - configuration
+    - trading/DCA
+    - trading/INDICATORS
+    - trading/PAIRS
+
+- name: Link version jar file
+  file:
+    src: "/usr/local/src/pt-{{ bot_config.version|default(pt_default_version) }}/ProfitTrailer/ProfitTrailer.jar"
+    path: "/home/{{ pt_bot_user }}/{{ bot_config.name }}/ProfitTrailer.jar"
+    owner: "{{ pt_bot_user }}"
+    group: "{{ pt_bot_user }}"
+    state: hard
+
+- name: Add profittrailer command
+  template:
+    src: templates/cmd.j2
+    dest: "/usr/local/bin/pt_{{ bot_config.name }}"
+    mode: 0755
+    owner: root
+    group: "{{ pt_bot_user }}"

@@ -1,0 +1,28 @@
+# Install the correct ProfitTrailer version
+- name: Create ProfitTrailer source dir
+  file:
+    path: "/usr/local/src/pt-{{ bot_config.version|default(pt_default_version) }}"
+    state: directory
+  register: pt_create_source_dir
+
+- name: Download Profit Trailer
+  unarchive:
+    src: "https://github.com/taniman/profit-trailer/releases/download/v{{ bot_config.version|default(pt_default_version) }}/ProfitTrailer.zip"
+    dest: "/usr/local/src/pt-{{ bot_config.version|default(pt_default_version) }}"
+    remote_src: yes
+  when: pt_create_source_dir.changed
+
+# Add config
+- name: Create bot' living space
+  file:
+    path: "/home/{{ pt_bot_user }}/{{ bot_config.name }}"
+    state: directory
+    owner: "{{ pt_bot_user }}"
+    group: "{{ pt_bot_user }}"
+
+- name: Create trading dir
+  file:
+    path: "/home/{{ pt_bot_user }}/{{ bot_config.name }}/trading"
+    state: directory
+    owner: "{{ pt_bot_user }}"
+    group: "{{ pt_bot_user }}"

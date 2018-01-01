@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Dennis Enderink
+  description: Ansible role for installing and managing Profit Trailer
+  issue_tracker_url: https://github.com/dennisenderink/profit-trailer/issues
+  license: BSD-3
+  min_ansible_version: 2.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - artful
+  galaxy_tags:
+    - profit
+    - trailer
+    - profit-trailer
+    - bot
+dependencies: []

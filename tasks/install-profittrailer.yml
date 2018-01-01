@@ -1,0 +1,9 @@
+---
+- name: Create bot user
+  user:
+    name: "{{ pt_bot_user }}"
+
+- include: bot-living-space.yml
+  with_items: "{{ pt_bots }}"
+  loop_control:
+    loop_var: bot_config

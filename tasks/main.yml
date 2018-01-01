@@ -1,0 +1,9 @@
+---
+# tasks file for profit-trailer
+- include: install-dependencies.yml
+  when: pt_config_only == false
+- include: install-profittrailer.yml
+  when: pt_config_only == false
+
+- include: manage-bots.yml
+

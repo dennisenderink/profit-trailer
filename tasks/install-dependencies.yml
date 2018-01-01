@@ -1,0 +1,24 @@
+---
+- name: Install prerequisites
+  apt:
+    name: software-properties-common
+
+- name: Add java repository
+  apt_repository:
+    repo: ppa:webupd8team/java
+
+- name: Update apt-get
+  apt:
+    update_cache: yes
+
+- name: Accept Oracle JDK8 license
+  shell: oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+
+- name: Install dependencies
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - default-jre
+    - oracle-java8-set-default
+    - nodejs
+    - npm
