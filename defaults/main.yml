@@ -1,6 +1,6 @@
 ---
 # defaults file for profit-trailer
 pt_config_only: false
-pt_default_version: 1.2.6.8
+pt_default_version: 1.2.6.9
 pt_bot_user: ptbot
 pt_bots: []
